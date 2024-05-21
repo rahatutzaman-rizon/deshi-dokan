@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./Components/Header";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import Footer from "./Components/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
       <AppRouterCacheProvider>
            {children}
  </AppRouterCacheProvider>
-
+<Footer></Footer>
       </body>
     </html>
 
