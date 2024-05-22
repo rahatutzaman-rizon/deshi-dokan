@@ -44,7 +44,7 @@ const Contact = () => {
         {/* About Us */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 animate-pulse">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 ">
               About Us
             </h3>
             <p className="mt-1 text-sm text-gray-500">
@@ -64,9 +64,9 @@ const Contact = () => {
         {/* Supplier Information */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 animate-pulse">
+            <h2 className="text-lg leading-6 font-medium text-gray-900 ">
               Become a Supplier
-            </h3>
+            </h2>
             <p className="mt-1 text-sm text-gray-500">
               Provide your farm-fresh products to our shop and reach a wider customer base.
             </p>
@@ -99,7 +99,7 @@ const Contact = () => {
         {/* Delivery Information */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 animate-pulse">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 ">
               Delivery Information
             </h3>
             <p className="mt-1 text-sm text-gray-500">
@@ -118,7 +118,7 @@ const Contact = () => {
 
         {/* Contact Information */}
         <div>
-          <h3 className="text-lg leading-6 font-medium text-gray-900 animate-pulse">Contact Us</h3>
+          <h3 className="text-lg leading-6 font-medium text-gray-900 ">Contact Us</h3>
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mt-4">
             <div className="px-4 py-5 sm:px-6">
               <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">

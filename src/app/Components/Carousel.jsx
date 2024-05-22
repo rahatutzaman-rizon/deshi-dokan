@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -12,9 +11,10 @@ const Carousel = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://food-supply-server-1.onrender.com/products');
+        const response = await fetch('https://deshi-dokan-server.vercel.app/products');
         const data = await response.json();
-        setProducts(data);
+        const flashSaleProducts = data.filter(product => product.flashSale === 'no');
+        setProducts(flashSaleProducts);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -44,16 +44,63 @@ const Carousel = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-green-400 to-blue-500 py-12 mb-12 w-full">
-      <div className="container">
+    <div className="bg-gradient-to-r from-green-400 to-blue-500 py-12 mb-8 w-full">
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-marquee {
+          animation: marquee linear infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+
+        .animate-pulse {
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .animate-bounce {
+          animation: bounce 3s infinite;
+        }
+      `}</style>
+
+      <div className="container mx-auto">
         {/* Center Information */}
-        <div className="text-center mb-4">
-          <h2 className="text-6xl font-bold text-white mb-4">Welcome to Deshi_Dokan</h2>
-          <p className="text-2xl text-white">Your one-stop destination for all your culinary needs.</p>
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold text-white mb-2">Welcome to Deshi Dokan</h2>
+          <p className="text-xl text-white">Your one-stop destination for fresh and affordable groceries.</p>
+        </div>
+
+        {/* Flash Sale Banner */}
+        <div className="bg-yellow-500 text-white px-8 py-4 rounded-lg shadow-lg mb-8 mx-auto max-w-2xl">
+          <h2 className="text-3xl font-bold mb-2 animate-pulse">Deshi Dokan Flash Sale</h2>
+          <p className="text-lg animate-bounce">Get up to 10% off on selected products!</p>
         </div>
 
         {/* Flash Sale Products */}
-        <div className="flex justify-center items-center mb-4">
+        <div className="flex justify-center items-center mb-8">
           <button
             onClick={handlePrev}
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-full focus:outline-none"
@@ -66,23 +113,41 @@ const Carousel = () => {
               />
             </svg>
           </button>
-          <div className="flex mt-12 h-24">
-            {products.slice(currentIndex, currentIndex + 3).map((product, index) => (
-              <div key={index} className="flex-shrink-0 animate-pulse mx-4">
-                <div className="bg-white rounded-lg p-2 max-w-sm">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.title}
-                    width={500}
-                    height={200}
-                    className="w-full h-40 object-cover rounded-lg mb-4"
-                  />
-                  <h4 className="text-lg font-bold mb-2 text-gray-800">{product.title}</h4>
-                  <p className="text-gray-600">Category: {product.category}</p>
+
+          <div className="flex overflow-hidden relative">
+            <div
+              className="flex animate-marquee whitespace-nowrap"
+              style={{ animationDuration: `${products.length * 5}s` }}
+            >
+              {products.map((product, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 animate-pulse mx-4 transition-all duration-500 ease-in-out"
+                >
+                  <div className="bg-white rounded-lg p-2 max-w-xs">
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.title}
+                      width={200}
+                      height={100}
+                      className="w-full h-32 object-cover rounded-lg mb-2"
+                    />
+                    <h4 className="text-lg font-bold mb-1 text-gray-800">{product.title}</h4>
+                    <p className="text-sm text-gray-600 mb-1">Category: {product.category}</p>
+
+
+                    <p className="text-lg font-bold text-green-600">
+                      ${(product.price * 0.9).toFixed(2)}
+                      <span className="text-sm font-normal text-gray-500 ml-1">
+                        <strike>${product.price}</strike>
+                      </span>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
           <button
             onClick={handleNext}
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-full focus:outline-none"
