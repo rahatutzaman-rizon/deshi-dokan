@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -31,7 +32,9 @@ const CategoryList = () => {
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <li key={index} className="bg-white p-4 rounded-lg shadow-md text-center">
-              <span className="text-xl font-semibold text-gray-700">{category}</span>
+              <Link href={`category/${category}`}>
+                <p className="text-xl font-semibold text-gray-700">{category}</p>
+              </Link>
             </li>
           ))}
         </ul>
